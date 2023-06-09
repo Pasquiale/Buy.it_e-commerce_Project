@@ -10,6 +10,7 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
+
                 @guest
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ route('register') }}">Registrati</a>
@@ -18,10 +19,14 @@
                         <a class="nav-link active" aria-current="page" href="{{ route('login') }}">Accedi</a>
                     </li>
                 @else
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{ route('announcements.create') }}">Nuovo
+                            Annuncio</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
-                            {{Auth::user()->name}}
+                            {{ Auth::user()->name }}
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Action</a></li>
@@ -29,9 +34,11 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="/logout" onclick="event.preventDefault(); document.querySelector('#form-logout').submit();">Logout</a></li>
-                            <form method="POST" action="{{route('logout')}}" id="form-logout">
-                            @csrf</form>
+                            <li><a class="dropdown-item" href="/logout"
+                                    onclick="event.preventDefault(); document.querySelector('#form-logout').submit();">Logout</a>
+                            </li>
+                            <form method="POST" action="{{ route('logout') }}" id="form-logout">
+                                @csrf</form>
 
                         </ul>
                     </li>
